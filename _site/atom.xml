@@ -4,7 +4,7 @@
  <title>IFT6758 Blog A-09</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2023-10-10T15:44:33-04:00</updated>
+ <updated>2023-10-10T16:02:54-04:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name>Sebastian Cobuzzi, Mohamed Ali Mami, Olivier Couture, Rodrigo Flores Soto</name>
@@ -17,11 +17,103 @@
    <link href="http://localhost:4000/2023/10/10/milestone-1/"/>
    <updated>2023-10-10T00:00:00-04:00</updated>
    <id>http://localhost:4000/2023/10/10/milestone-1</id>
-   <content type="html">&lt;h2 id=&quot;question-1&quot;&gt;Question 1&lt;/h2&gt;
+   <content type="html">&lt;h2 id=&quot;section-1--acquisition-de-données&quot;&gt;Section 1 : Acquisition de données&lt;/h2&gt;
+
+&lt;h3 id=&quot;question-11&quot;&gt;Question 1.1&lt;/h3&gt;
+
+&lt;div class=&quot;message&quot;&gt;
+    Rédigez un bref tutoriel sur comment votre équipe a téléchargé l&apos;ensemble de données. Imaginez que vous cherchiez un guide sur comment télécharger les données play-by-play; votre guide devrait vous faire dire &quot;Parfait - c&apos;est exactement ce que je cherchais!&quot;. Incluez votre fonction/classe et fournissez un exemple de son utilisation.
+&lt;/div&gt;
 
 &lt;p&gt;…content…&lt;/p&gt;
 
-&lt;h2 id=&quot;question-2&quot;&gt;Question 2&lt;/h2&gt;
+&lt;h2 id=&quot;section-2--débogage-interactif&quot;&gt;Section 2 : Débogage interactif&lt;/h2&gt;
+
+&lt;h3 id=&quot;question-21&quot;&gt;Question 2.1&lt;/h3&gt;
+
+&lt;div class=&quot;message&quot;&gt;
+    Implémentez un ipywidget qui vous permet de parcourir tous les événements, pour chaque match d&apos;une saison donnée, avec la possibilité de changer entre la saison régulière et les séries éliminatoires. Dessinez les coordonnées de l&apos;événement sur l&apos;image de la patinoire fournie, similaire à l&apos;exemple ci-dessous (vous pouvez simplement imprimer les données de l&apos;événement lorsqu&apos;il n&apos;y a pas de coordonnées). Vous pouvez également imprimer toutes les informations que vous jugez utiles, telles que les métadonnées du jeu/boxscores et les résumés des événements (mais ce n&apos;est pas obligatoire). Prenez une capture d&apos;écran de l&apos;outil et ajoutez-la à l’article de blog, accompagnée du code de l&apos;outil et d&apos;une brève description (1-2 phrases) de ce que fait votre outil. Vous n&apos;avez pas à vous soucier de l&apos;intégration de l&apos;outil dans le blogpost.
+&lt;/div&gt;
+
+&lt;p&gt;…content…&lt;/p&gt;
+
+&lt;h2 id=&quot;section-4--nettoyer-les-données&quot;&gt;Section 4 : Nettoyer les données&lt;/h2&gt;
+
+&lt;h3 id=&quot;question-41&quot;&gt;Question 4.1&lt;/h3&gt;
+&lt;div class=&quot;message&quot;&gt;
+    Dans votre article de blog, incluez un petit extrait de votre dataframe final (par exemple, en utilisant head(10)). Vous pouvez simplement inclure une capture d&apos;écran plutôt que de vous battre pour que les tableaux soient soigneusement formatés en HTML/markdown.
+&lt;/div&gt;
+
+&lt;p&gt;…content…&lt;/p&gt;
+
+&lt;h3 id=&quot;question-42&quot;&gt;Question 4.2&lt;/h3&gt;
+&lt;div class=&quot;message&quot;&gt;
+    Vous remarquerez que le champ de « force » (c.-à-d. égal, avantage numérique ou en désavantage numérique) n&apos;existe que pour les buts, pas pour les tirs. De plus, il n&apos;inclut pas la force réelle des joueurs sur la glace (c&apos;est-à-dire 5 contre 4, ou 5 contre 3, etc.). Discutez de la façon dont vous pourriez ajouter les informations sur la force réelle (c&apos;est-à-dire 5 contre 4, etc.) aux tirs et aux buts, compte tenu des autres types d&apos;événements (autre que ces derniers) et des autres données disponibles. Vous n&apos;avez pas besoin d’implémenter cette fonctionnalité pour ce milestone.
+&lt;/div&gt;
+
+&lt;p&gt;…content…&lt;/p&gt;
+
+&lt;h3 id=&quot;question-43&quot;&gt;Question 4.3&lt;/h3&gt;
+&lt;div class=&quot;message&quot;&gt;
+    En quelques phrases, discutez d’au moins 3 caractéristiques supplémentaires que vous pourriez envisager de créer à partir des données disponibles dans cet ensemble de données. Nous ne cherchons pas de réponses particulières, mais si vous avez besoin d&apos;inspiration, un tir ou un but pourrait-il être classé comme un rebond/tir en contre-attaque (expliquez comment identifier ceux-ci)?
+&lt;/div&gt;
+
+&lt;p&gt;…content…&lt;/p&gt;
+
+&lt;h2 id=&quot;section-5--visualisations-simples&quot;&gt;Section 5 : Visualisations simples&lt;/h2&gt;
+
+&lt;h3 id=&quot;question-51&quot;&gt;Question 5.1&lt;/h3&gt;
+&lt;div class=&quot;message&quot;&gt;
+    Produisez un graphique comparant les types de tirs de toutes les équipes dans une saison de votre choix (i.e. agrégez juste sur tous les tirs). Superposez le nombre de buts sur le nombre de tirs. Quel semble être le type de tir le plus dangereux? Le type de tir le plus courant? Pourquoi est-ce que vous avez choisi ce type de graphique? Ajoutez ce graphique et cette discussion à votre article de blog.
+&lt;/div&gt;
+
+&lt;p&gt;…content…&lt;/p&gt;
+
+&lt;h3 id=&quot;question-52&quot;&gt;Question 5.2&lt;/h3&gt;
+&lt;div class=&quot;message&quot;&gt;
+    Quelle est la relation entre la distance à laquelle un tir a été effectué et la chance qu&apos;il s&apos;agisse d&apos;un but? Produisez un graphique pour chaque saison entre 2018-19 et 2020-21 pour répondre à cette question, et ajoutez-le à votre article de blog avec quelques phrases décrivant le graphique. Y a-t-il eu beaucoup de changements au cours des trois dernières saisons? Pourquoi est-ce que vous avez choisi ce type de graphique?
+        a.	Trouver la distance du tir nécessite la combinaison de plusieurs des données, c’est à vous de trouver une méthode qui fonctionne pour la majorité des parties (certaines ont des informations manquantes).
+        b.	Si vous notez quelques données aberrantes, ne vous inquiétez pas, on en reparlera dans le milestone 2.
+
+&lt;/div&gt;
+
+&lt;p&gt;…content…&lt;/p&gt;
+
+&lt;h3 id=&quot;question-53&quot;&gt;Question 5.3&lt;/h3&gt;
+&lt;div class=&quot;message&quot;&gt;
+    Combinez les informations des sections précédentes pour produire un graphique qui montre le pourcentage de buts (# buts / # tirs) en fonction à la fois de la distance par rapport au filet et de la catégorie de types de tirs (vous pouvez choisir une seule saison de votre choix). Discutez brièvement de vos conclusions. Par exemple, quels sont les types de tirs les plus dangereux?
+&lt;/div&gt;
+
+&lt;p&gt;…content…&lt;/p&gt;
+
+&lt;h2 id=&quot;section-6--visualisations-avancées&quot;&gt;Section 6 : Visualisations avancées&lt;/h2&gt;
+
+&lt;h3 id=&quot;question-61&quot;&gt;Question 6.1&lt;/h3&gt;
+&lt;div class=&quot;message&quot;&gt;
+    Exportez les 4 graphiques de zone offensive au format HTML et intégrez-les dans votre article de blog. Votre graphique doit permettre aux utilisateurs de sélectionner n&apos;importe quelle équipe pour la saison sélectionnée.
+    Note: Parce que vous pouvez trouver ces graphiques sur l’internet, répondre à ces questions sans produire ces graphiques ne vous rapportera pas de points !
+&lt;/div&gt;
+
+&lt;p&gt;…content…&lt;/p&gt;
+
+&lt;h3 id=&quot;question-62&quot;&gt;Question 6.2&lt;/h3&gt;
+&lt;div class=&quot;message&quot;&gt;
+    Discutez (en quelques phrases) de ce que vous pouvez interpréter à partir de ces graphiques.
+&lt;/div&gt;
+
+&lt;p&gt;…content…&lt;/p&gt;
+
+&lt;h3 id=&quot;question-63&quot;&gt;Question 6.3&lt;/h3&gt;
+&lt;div class=&quot;message&quot;&gt;
+    Considérez l&apos;Avalanche du Colorado; jetez un œil à leur carte de tir au cours de la saison 2016-17. Discutez de ce que vous pourriez dire sur l&apos;équipe au cours de cette saison. Regardez maintenant la carte de tirs de l&apos;Avalanche du Colorado pour la saison 2020-21 et discutez de ce que vous pouvez conclure de ces différences. Est-ce que ça a du sens? Astuce : regardez le classement.
+&lt;/div&gt;
+
+&lt;p&gt;…content…&lt;/p&gt;
+
+&lt;h3 id=&quot;question-64&quot;&gt;Question 6.4&lt;/h3&gt;
+&lt;div class=&quot;message&quot;&gt;
+    Considérez les Sabres de Buffalo, une équipe qui a connu des difficultés ces dernières années, et comparez-les au Lightning de Tampa Bay, une équipe qui a remporté la coupe Stanley pour deux années consécutives. Regardez les plans de tir de ces deux équipes des saisons 2018-19, 2019-20 et 2020-21. Discutez des observations que vous pouvez faire. Y a-t-il quelque chose qui pourrait expliquer le succès du Lightning, ou les problème des Sabres ? Est-ce que ces images sont suffisantes pour tout comprendre les succès ou problèmes d’une équipe?
+&lt;/div&gt;
 
 &lt;p&gt;…content…&lt;/p&gt;
 </content>
