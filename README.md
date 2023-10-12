@@ -11,12 +11,9 @@ TODO:
         - Voir si plus de détails sont pertinents
     - _config.yml
         - maybe some links?
+    - Essayer d'ajuster la largeur du texte? le wrapping du code fait pas super beau
 
 - Questions:
-    - 1
-        - 1.1
-    - 2
-        - 2.1
     - 4
         - 4.1
         - 4.2

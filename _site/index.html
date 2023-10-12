@@ -168,8 +168,133 @@
     Implémentez un ipywidget qui vous permet de parcourir tous les événements, pour chaque match d'une saison donnée, avec la possibilité de changer entre la saison régulière et les séries éliminatoires. Dessinez les coordonnées de l'événement sur l'image de la patinoire fournie, similaire à l'exemple ci-dessous (vous pouvez simplement imprimer les données de l'événement lorsqu'il n'y a pas de coordonnées). Vous pouvez également imprimer toutes les informations que vous jugez utiles, telles que les métadonnées du jeu/boxscores et les résumés des événements (mais ce n'est pas obligatoire). Prenez une capture d'écran de l'outil et ajoutez-la à l’article de blog, accompagnée du code de l'outil et d'une brève description (1-2 phrases) de ce que fait votre outil. Vous n'avez pas à vous soucier de l'intégration de l'outil dans le blogpost.
 </div>
 
-<p>…content…</p>
+<p><img src="/assets/Q2.png" alt="q2_ipywidgets" /></p>
 
+<p>L’outil développé permet de visualiser les différents évènements assez facilement à l’aide de ipywidget tout en naviguant les différentes parties, années et type de saisons. Sur une erreur de la visualisation, par exemple sur un début de partie ou n’importe quel évènement où les coordonnées ne sont pas disponibles, le texte en format json est montré à la place. L’outil balaye les fichiers locaux disponibles localement pour faire la liste des données à visualiser.</p>
+
+<p><img src="/assets/Q2_no-event.png" alt="q2_no-event" /></p>
+
+<div class="language-python highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">import</span> <span class="nn">ipywidgets</span> <span class="k">as</span> <span class="n">widgets</span>
+<span class="kn">from</span> <span class="nn">IPython.display</span> <span class="kn">import</span> <span class="n">display</span>
+<span class="kn">import</span> <span class="nn">matplotlib.image</span> <span class="k">as</span> <span class="n">mpimg</span>
+<span class="kn">import</span> <span class="nn">json</span>
+<span class="kn">import</span> <span class="nn">os</span>
+<span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="n">plt</span>
+
+<span class="k">class</span> <span class="nc">event_visualizer</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+    <span class="k">def</span> <span class="nf">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">path</span><span class="p">,</span> <span class="n">img_path</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">path</span> <span class="o">=</span> <span class="n">path</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">rink_img</span> <span class="o">=</span> <span class="n">mpimg</span><span class="p">.</span><span class="n">imread</span><span class="p">(</span><span class="n">img_path</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">initialize_values</span><span class="p">()</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">create_widgets</span><span class="p">()</span>
+
+    <span class="k">def</span> <span class="nf">initialize_values</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+            <span class="bp">self</span><span class="p">.</span><span class="n">season_type</span> <span class="o">=</span> <span class="s">'02'</span> <span class="c1"># init only
+</span>            <span class="bp">self</span><span class="p">.</span><span class="n">games_list</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">get_games_list</span><span class="p">()</span>
+            <span class="bp">self</span><span class="p">.</span><span class="n">year_list</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">get_year_list</span><span class="p">()</span>
+            <span class="bp">self</span><span class="p">.</span><span class="n">year</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">year_list</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="c1"># init only
+</span>            <span class="bp">self</span><span class="p">.</span><span class="n">game_ids</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">get_games_in_season</span><span class="p">()</span>
+            <span class="bp">self</span><span class="p">.</span><span class="n">game_id</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">game_ids</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="c1"># init only
+</span>            <span class="bp">self</span><span class="p">.</span><span class="nb">file</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">read_file</span><span class="p">()</span>
+            <span class="bp">self</span><span class="p">.</span><span class="n">events</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="nb">file</span><span class="p">[</span><span class="s">'playByPlay'</span><span class="p">]</span>
+            <span class="bp">self</span><span class="p">.</span><span class="n">event_id</span> <span class="o">=</span> <span class="mi">0</span> <span class="c1"># init only
+</span>
+    <span class="k">def</span> <span class="nf">create_widgets</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">w_season_type</span> <span class="o">=</span> <span class="n">widgets</span><span class="p">.</span><span class="n">ToggleButtons</span><span class="p">(</span>
+            <span class="n">options</span><span class="o">=</span><span class="p">[(</span><span class="s">'Regular'</span><span class="p">,</span> <span class="s">'02'</span><span class="p">),</span> <span class="p">(</span><span class="s">'Playoff'</span><span class="p">,</span> <span class="s">'03'</span><span class="p">)],</span>
+            <span class="n">description</span><span class="o">=</span><span class="s">'Season type'</span>
+            <span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">w_season_year</span> <span class="o">=</span> <span class="n">widgets</span><span class="p">.</span><span class="n">ToggleButtons</span><span class="p">(</span>
+            <span class="n">options</span><span class="o">=</span><span class="bp">self</span><span class="p">.</span><span class="n">year_list</span><span class="p">,</span>
+            <span class="n">description</span><span class="o">=</span><span class="s">"Season year"</span>
+            <span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">w_game_ids</span> <span class="o">=</span> <span class="n">widgets</span><span class="p">.</span><span class="n">SelectionSlider</span><span class="p">(</span>
+            <span class="n">options</span><span class="o">=</span><span class="bp">self</span><span class="p">.</span><span class="n">game_ids</span><span class="p">,</span>
+            <span class="n">value</span><span class="o">=</span><span class="bp">self</span><span class="p">.</span><span class="n">game_ids</span><span class="p">[</span><span class="mi">0</span><span class="p">],</span>
+            <span class="n">description</span><span class="o">=</span><span class="s">"Game id"</span>
+            <span class="p">)</span>
+
+        <span class="bp">self</span><span class="p">.</span><span class="n">w_season_year</span><span class="p">.</span><span class="n">observe</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">update</span><span class="p">,</span> <span class="s">'value'</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">w_season_type</span><span class="p">.</span><span class="n">observe</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">update</span><span class="p">,</span> <span class="s">'value'</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">w_game_ids</span><span class="p">.</span><span class="n">observe</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">update</span><span class="p">,</span> <span class="s">'value'</span><span class="p">)</span>
+
+        <span class="bp">self</span><span class="p">.</span><span class="n">grid</span> <span class="o">=</span> <span class="n">widgets</span><span class="p">.</span><span class="n">GridspecLayout</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">grid</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">w_season_type</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">grid</span><span class="p">[</span><span class="mi">1</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">w_season_year</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">grid</span><span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">w_game_ids</span>
+
+    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="o">*</span><span class="n">args</span><span class="p">):</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">season_type</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">w_season_type</span><span class="p">.</span><span class="n">value</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">games_list</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">get_games_list</span><span class="p">()</span>
+
+        <span class="bp">self</span><span class="p">.</span><span class="n">year_list</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">get_year_list</span><span class="p">()</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">w_season_year</span><span class="p">.</span><span class="n">options</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">year_list</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">year</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">w_season_year</span><span class="p">.</span><span class="n">value</span>
+
+        <span class="bp">self</span><span class="p">.</span><span class="n">game_ids</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">get_games_in_season</span><span class="p">()</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">w_game_ids</span><span class="p">.</span><span class="n">options</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">game_ids</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">game_id</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">w_game_ids</span><span class="p">.</span><span class="n">value</span>
+
+        <span class="bp">self</span><span class="p">.</span><span class="nb">file</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">read_file</span><span class="p">()</span>
+        <span class="bp">self</span><span class="p">.</span><span class="n">events</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="nb">file</span><span class="p">[</span><span class="s">'playByPlay'</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">get_games_list</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">games_list</span> <span class="o">=</span> <span class="n">os</span><span class="p">.</span><span class="n">listdir</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">path</span><span class="p">)</span>
+        <span class="k">return</span> <span class="p">[</span> <span class="n">i</span><span class="p">[</span><span class="mi">5</span><span class="p">:</span><span class="mi">9</span><span class="p">]</span> <span class="o">+</span> <span class="s">"_"</span> <span class="o">+</span> <span class="n">i</span><span class="p">[</span><span class="mi">11</span><span class="p">:</span><span class="mi">15</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">games_list</span> <span class="k">if</span> <span class="n">i</span><span class="p">[</span><span class="mi">9</span><span class="p">:</span><span class="mi">11</span><span class="p">]</span><span class="o">==</span><span class="bp">self</span><span class="p">.</span><span class="n">season_type</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">get_year_list</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">year_list</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span> <span class="p">[</span><span class="n">i</span><span class="p">.</span><span class="n">split</span><span class="p">(</span><span class="s">"_"</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">.</span><span class="n">games_list</span><span class="p">]</span> <span class="p">))</span>
+        <span class="n">year_list</span><span class="p">.</span><span class="n">sort</span><span class="p">()</span>
+        <span class="k">return</span> <span class="n">year_list</span>
+
+    <span class="k">def</span> <span class="nf">get_games_in_season</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">season_games</span> <span class="o">=</span> <span class="p">[</span> <span class="n">i</span><span class="p">.</span><span class="n">split</span><span class="p">(</span><span class="s">"_"</span><span class="p">)[</span><span class="mi">1</span><span class="p">]</span> <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="bp">self</span><span class="p">.</span><span class="n">games_list</span> <span class="k">if</span> <span class="n">i</span><span class="p">[</span><span class="mi">0</span><span class="p">:</span><span class="mi">4</span><span class="p">]</span><span class="o">==</span><span class="bp">self</span><span class="p">.</span><span class="n">year</span> <span class="p">]</span>
+        <span class="n">season_games</span><span class="p">.</span><span class="n">sort</span><span class="p">()</span> <span class="c1">#should be by default but still safer
+</span>        <span class="k">return</span> <span class="n">season_games</span>
+
+    <span class="k">def</span> <span class="nf">read_file</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="n">f</span> <span class="o">=</span> <span class="nb">open</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">path</span> <span class="o">+</span> <span class="s">"game_{year}{season}{id}.json"</span><span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="n">year</span><span class="o">=</span><span class="bp">self</span><span class="p">.</span><span class="n">year</span><span class="p">,</span>
+                                                                   <span class="n">season</span><span class="o">=</span><span class="bp">self</span><span class="p">.</span><span class="n">season_type</span><span class="p">,</span>
+                                                                   <span class="nb">id</span><span class="o">=</span><span class="bp">self</span><span class="p">.</span><span class="n">game_id</span><span class="p">)</span>
+                <span class="p">)</span>
+        <span class="n">data</span> <span class="o">=</span> <span class="n">json</span><span class="p">.</span><span class="n">load</span><span class="p">(</span><span class="n">f</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">data</span>
+
+    <span class="k">def</span> <span class="nf">plot_event</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">event_id</span><span class="p">):</span>
+        <span class="k">try</span> <span class="p">:</span>
+            <span class="n">x</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">events</span><span class="p">[</span><span class="n">event_id</span><span class="p">][</span><span class="s">'coordinates'</span><span class="p">][</span><span class="s">'x'</span><span class="p">]</span>
+            <span class="n">y</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">events</span><span class="p">[</span><span class="n">event_id</span><span class="p">][</span><span class="s">'coordinates'</span><span class="p">][</span><span class="s">'y'</span><span class="p">]</span>
+
+            <span class="n">title</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">events</span><span class="p">[</span><span class="n">event_id</span><span class="p">][</span><span class="s">'result'</span><span class="p">][</span><span class="s">'description'</span><span class="p">]</span>
+            <span class="n">time</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">events</span><span class="p">[</span><span class="n">event_id</span><span class="p">][</span><span class="s">'about'</span><span class="p">][</span><span class="s">'periodTime'</span><span class="p">]</span>
+            <span class="n">period</span> <span class="o">=</span> <span class="bp">self</span><span class="p">.</span><span class="n">events</span><span class="p">[</span><span class="n">event_id</span><span class="p">][</span><span class="s">'about'</span><span class="p">][</span><span class="s">'period'</span><span class="p">]</span>
+
+            <span class="n">fig</span> <span class="o">=</span> <span class="n">plt</span><span class="p">.</span><span class="n">figure</span><span class="p">()</span>
+            <span class="n">ax</span> <span class="o">=</span> <span class="n">fig</span><span class="p">.</span><span class="n">add_axes</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span><span class="mi">0</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">1</span><span class="p">])</span>
+            <span class="n">ax</span><span class="p">.</span><span class="n">imshow</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">rink_img</span><span class="p">,</span> <span class="n">extent</span><span class="o">=</span><span class="p">[</span><span class="mi">100</span><span class="p">,</span> <span class="o">-</span><span class="mi">100</span><span class="p">,</span> <span class="mf">42.5</span><span class="p">,</span> <span class="o">-</span><span class="mf">42.5</span><span class="p">])</span>
+            <span class="n">ax</span><span class="p">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="o">-</span><span class="mi">100</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+            <span class="n">ax</span><span class="p">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s">"feet"</span><span class="p">)</span>
+            <span class="n">ax</span><span class="p">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="o">-</span><span class="mf">42.5</span><span class="p">,</span> <span class="mf">42.5</span><span class="p">)</span>
+            <span class="n">ax</span><span class="p">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s">"feet"</span><span class="p">)</span>
+            <span class="n">ax</span><span class="p">.</span><span class="n">set_title</span><span class="p">(</span><span class="s">"{description}</span><span class="se">\n</span><span class="s">{time} P-{period}</span><span class="se">\n</span><span class="s">"</span><span class="p">.</span><span class="nb">format</span><span class="p">(</span><span class="n">description</span><span class="o">=</span><span class="n">title</span><span class="p">,</span>
+                                                                   <span class="n">time</span><span class="o">=</span><span class="n">time</span><span class="p">,</span>
+                                                                   <span class="n">period</span><span class="o">=</span><span class="n">period</span><span class="p">)</span>
+            <span class="p">)</span>
+            <span class="n">ax</span><span class="p">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x</span><span class="p">,</span><span class="n">y</span><span class="p">,</span> <span class="s">'ok'</span><span class="p">)</span>
+
+            <span class="n">plt</span><span class="p">.</span><span class="n">figtext</span><span class="p">(</span><span class="mf">0.15</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="bp">self</span><span class="p">.</span><span class="nb">file</span><span class="p">[</span><span class="s">'home'</span><span class="p">])</span> <span class="c1"># positions for these are hard coded since they shouldn't change
+</span>            <span class="n">plt</span><span class="p">.</span><span class="n">figtext</span><span class="p">(</span><span class="mf">0.65</span><span class="p">,</span> <span class="mf">0.8</span><span class="p">,</span> <span class="bp">self</span><span class="p">.</span><span class="nb">file</span><span class="p">[</span><span class="s">'away'</span><span class="p">])</span>
+
+            <span class="n">plt</span><span class="p">.</span><span class="n">show</span><span class="p">()</span>
+        <span class="k">except</span><span class="p">:</span>
+            <span class="k">print</span><span class="p">(</span> <span class="n">json</span><span class="p">.</span><span class="n">dumps</span><span class="p">(</span><span class="bp">self</span><span class="p">.</span><span class="n">events</span><span class="p">[</span><span class="n">event_id</span><span class="p">],</span> <span class="n">indent</span><span class="o">=</span><span class="mi">4</span><span class="p">)</span> <span class="p">)</span>
+
+
+<span class="n">game_viz</span> <span class="o">=</span> <span class="n">event_visualizer</span><span class="p">(</span><span class="s">"data/"</span><span class="p">,</span> <span class="s">"nhl_rink.png"</span><span class="p">)</span>
+<span class="n">display</span><span class="p">(</span><span class="n">game_viz</span><span class="p">.</span><span class="n">grid</span><span class="p">)</span>
+
+<span class="n">widgets</span><span class="p">.</span><span class="n">interact</span><span class="p">(</span><span class="n">game_viz</span><span class="p">.</span><span class="n">plot_event</span><span class="p">,</span> <span class="n">event_id</span><span class="o">=</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">game_viz</span><span class="p">.</span><span class="n">events</span><span class="p">)</span><span class="o">-</span><span class="mi">1</span><span class="p">))</span>
+</code></pre></div></div>
 <h2 id="section-4--nettoyer-les-données">Section 4 : Nettoyer les données</h2>
 
 <h3 id="question-41">Question 4.1</h3>
