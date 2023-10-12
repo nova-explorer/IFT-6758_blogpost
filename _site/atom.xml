@@ -4,7 +4,7 @@
  <title>IFT6758 Blog A-09</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2023-10-11T20:23:39-04:00</updated>
+ <updated>2023-10-11T20:54:10-04:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name>Sebastian Cobuzzi, Mohamed Ali Mami, Olivier Couture, Rodrigo Flores Soto</name>
@@ -210,6 +210,7 @@
 
 &lt;span class=&quot;n&quot;&gt;widgets&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;interact&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;game_viz&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;plot_event&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;event_id&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;nb&quot;&gt;len&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;game_viz&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;events&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;))&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
 &lt;h2 id=&quot;section-4--nettoyer-les-données&quot;&gt;Section 4 : Nettoyer les données&lt;/h2&gt;
 
 &lt;h3 id=&quot;question-41&quot;&gt;Question 4.1&lt;/h3&gt;
@@ -217,21 +218,49 @@
     Dans votre article de blog, incluez un petit extrait de votre dataframe final (par exemple, en utilisant head(10)). Vous pouvez simplement inclure une capture d&apos;écran plutôt que de vous battre pour que les tableaux soient soigneusement formatés en HTML/markdown.
 &lt;/div&gt;
 
-&lt;p&gt;…content…&lt;/p&gt;
+&lt;div class=&quot;language-python highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;df&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;tail&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;10&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/Q4-1.png&quot; alt=&quot;q4-1&quot; /&gt;&lt;/p&gt;
+
+&lt;!-- marche presque mais le site centre pas donc c&apos;est pas beau
+| event_id |  Season |    Phase | Period | PeriodTime | PlayID |                Team | RinkSide | XPoint | YPoint |           Shooter |             Goalie |   ShotType | EmptyNet | Event |  Situation | Distance |
+|---------:|--------:|---------:|-------:|-----------:|-------:|--------------------:|---------:|-------:|-------:|------------------:|-------------------:|-----------:|---------:|------:|-----------:|---------:|
+|   327332 | 2019-20 | Playoffs |      3 |      06:41 |    592 | Tampa Bay Lightning |     left |  -79.0 |   12.0 |      Alex Killorn |     Anton Khudobin |  Snap Shot |    False |  Goal |       Even |    168.0 |
+|   327333 | 2019-20 | Playoffs |      3 |      11:35 |    712 |        Dallas Stars |    right |   82.0 |   -8.0 |      Joe Pavelski | Andrei Vasilevskiy |  Deflected |    False |  Goal |       Even |    171.0 |
+|   327334 | 2019-20 | Playoffs |      4 |      06:34 |    901 | Tampa Bay Lightning |    right |   67.0 |  -24.0 | Kevin Shattenkirk |     Anton Khudobin |  Snap Shot |    False |  Goal | Power Play |    157.0 |
+|   327335 | 2019-20 | Playoffs |      1 |      17:52 |     90 |        Dallas Stars |    right |   74.0 |   -2.0 |       Corey Perry | Andrei Vasilevskiy | Wrist Shot |    False |  Goal |       Even |    163.0 |
+|   327336 | 2019-20 | Playoffs |      2 |      04:37 |    263 | Tampa Bay Lightning |    right |   83.0 |    4.0 |      Ondrej Palat |     Anton Khudobin | Wrist Shot |    False |  Goal |       Even |    172.0 |
+|   327337 | 2019-20 | Playoffs |      3 |      03:38 |    568 | Tampa Bay Lightning |     left |  -34.0 |  -20.0 | Mikhail Sergachev |     Anton Khudobin |  Slap Shot |    False |  Goal |       Even |    124.0 |
+|   327338 | 2019-20 | Playoffs |      3 |      13:15 |    595 |        Dallas Stars |    right |   83.0 |    4.0 |      Joe Pavelski | Andrei Vasilevskiy | Wrist Shot |    False |  Goal |       Even |    172.0 |
+|   327339 | 2019-20 | Playoffs |      5 |      09:23 |   1094 |        Dallas Stars |    right |   80.0 |    2.0 |       Corey Perry | Andrei Vasilevskiy | Wrist Shot |    False |  Goal |       Even |    169.0 |
+|   327340 | 2019-20 | Playoffs |      1 |      12:23 |     75 | Tampa Bay Lightning |     left |  -80.0 |    0.0 |     Brayden Point |     Anton Khudobin | Wrist Shot |    False |  Goal | Power Play |    169.0 |
+|   327341 | 2019-20 | Playoffs |      2 |      07:01 |    366 | Tampa Bay Lightning |    right |   64.0 |  -12.0 |     Blake Coleman |     Anton Khudobin |  Slap Shot |    False |  Goal |       Even |    153.0 | --&gt;
 
 &lt;h3 id=&quot;question-42&quot;&gt;Question 4.2&lt;/h3&gt;
 &lt;div class=&quot;message&quot;&gt;
     Vous remarquerez que le champ de « force » (c.-à-d. égal, avantage numérique ou en désavantage numérique) n&apos;existe que pour les buts, pas pour les tirs. De plus, il n&apos;inclut pas la force réelle des joueurs sur la glace (c&apos;est-à-dire 5 contre 4, ou 5 contre 3, etc.). Discutez de la façon dont vous pourriez ajouter les informations sur la force réelle (c&apos;est-à-dire 5 contre 4, etc.) aux tirs et aux buts, compte tenu des autres types d&apos;événements (autre que ces derniers) et des autres données disponibles. Vous n&apos;avez pas besoin d’implémenter cette fonctionnalité pour ce milestone.
 &lt;/div&gt;
 
-&lt;p&gt;…content…&lt;/p&gt;
+&lt;p&gt;Dans un match de hockey, chaque action sur la glace a son importance, qu’il s’agisse d’un tir, d’un but ou même d’une pénalité. Lorsque nous examinons les statistiques, nous pouvons souvent voir le nombre de tirs ou de buts, mais une dimension souvent négligée est la “force réelle” lors de ces actions. La force réelle se réfère à la situation numérique sur la glace, comme 5 contre 4 lors d’une pénalité ou 5 contre 5 en jeu égal.&lt;/p&gt;
+
+&lt;p&gt;Pour déterminer cette force réelle, il est essentiel d’intégrer les données des événements de pénalité dans notre DataFrame. Chaque pénalité indique la durée pendant laquelle une équipe jouera en infériorité numérique. En suivant ces pénalités et en les associant aux tirs et aux buts qui se produisent pendant leur durée, nous pouvons déduire la force réelle de chaque attaque. Par exemple, si une pénalité de deux minutes est infligée à 10:00 et qu’un tir est enregistré à 10:30, on peut conclure que ce tir a eu lieu en avantage numérique.&lt;/p&gt;
+
+&lt;p&gt;Mais attention, d’autres événements peuvent influencer la situation. Un but marqué pendant un avantage numérique pourrait annuler la pénalité, ou des pénalités simultanées pourraient maintenir un jeu à 5 contre 5. Il est donc crucial de prendre en compte tous les événements du jeu.&lt;/p&gt;
 
 &lt;h3 id=&quot;question-43&quot;&gt;Question 4.3&lt;/h3&gt;
 &lt;div class=&quot;message&quot;&gt;
     En quelques phrases, discutez d’au moins 3 caractéristiques supplémentaires que vous pourriez envisager de créer à partir des données disponibles dans cet ensemble de données. Nous ne cherchons pas de réponses particulières, mais si vous avez besoin d&apos;inspiration, un tir ou un but pourrait-il être classé comme un rebond/tir en contre-attaque (expliquez comment identifier ceux-ci)?
 &lt;/div&gt;
 
-&lt;p&gt;…content…&lt;/p&gt;
+&lt;h4 id=&quot;efficacité-des-joueurs&quot;&gt;Efficacité des Joueurs&lt;/h4&gt;
+&lt;p&gt;En utilisant les données sur les joueurs qui tirent, on pourrait créer une métrique pour évaluer l’efficacité des tirs de chaque joueur. Cela consisterait à calculer le pourcentage de tirs d’un joueur qui se transforment en buts. Cette métrique pourrait aider à identifier les joueurs les plus dangereux ou les plus efficaces en face du but.&lt;/p&gt;
+
+&lt;h4 id=&quot;efficacité-du-gardien-de-but&quot;&gt;Efficacité du Gardien de but&lt;/h4&gt;
+&lt;p&gt;En se basant sur le nombre de tirs qu’un gardien de but reçoit et le nombre de buts qu’il concède, on pourrait calculer un taux d’arrêt pour chaque gardien. Cela donnerait une mesure directe de l’efficacité d’un gardien à stopper les tirs adverses.&lt;/p&gt;
+
+&lt;h4 id=&quot;tirs-en-contre-attaque---rebonds&quot;&gt;Tirs en Contre-Attaque - Rebonds&lt;/h4&gt;
+&lt;p&gt;Pour identifier un tir en contre-attaque, on pourrait examiner la séquence des événements. Si un “Hit” ou un “Turnover” est suivi rapidement par un tir de l’équipe opposée, cela pourrait indiquer un tir en contre-attaque. Si un tir est suivi immédiatement par un autre tir de la même équipe sans qu’un événement significatif se produise entre les deux (comme un dégagement ou un arrêt de jeu), le second tir pourrait être considéré comme un rebond.&lt;/p&gt;
 
 &lt;h2 id=&quot;section-5--visualisations-simples&quot;&gt;Section 5 : Visualisations simples&lt;/h2&gt;
 
