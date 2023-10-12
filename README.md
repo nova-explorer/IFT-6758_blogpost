@@ -17,9 +17,7 @@ TODO:
     - 4
         - 4.1 Possibilité de le mettre en markdown, le formattage du paragraphe est juste pas centré
     - 5
-        - 5.1 Changer pour html interactif sur saison
-        - 5.2 Changer pour html interactif sur saison
-        - 5.3 Changer pour html interactif sur saison
+        - 5.2 Pas changé en html interactif puisque je pense que c'est intéressant de voir les trois graphiques côte-à-côte
     - 6
         - 6.1
         - 6.2
