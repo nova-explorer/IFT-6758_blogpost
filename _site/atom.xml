@@ -4,7 +4,7 @@
  <title>IFT6758 Blog A-09</title>
  <link href="http://localhost:4000/atom.xml" rel="self"/>
  <link href="http://localhost:4000/"/>
- <updated>2023-10-11T20:54:10-04:00</updated>
+ <updated>2023-10-11T22:39:16-04:00</updated>
  <id>http://localhost:4000</id>
  <author>
    <name>Sebastian Cobuzzi, Mohamed Ali Mami, Olivier Couture, Rodrigo Flores Soto</name>
@@ -269,7 +269,18 @@
     Produisez un graphique comparant les types de tirs de toutes les équipes dans une saison de votre choix (i.e. agrégez juste sur tous les tirs). Superposez le nombre de buts sur le nombre de tirs. Quel semble être le type de tir le plus dangereux? Le type de tir le plus courant? Pourquoi est-ce que vous avez choisi ce type de graphique? Ajoutez ce graphique et cette discussion à votre article de blog.
 &lt;/div&gt;
 
-&lt;p&gt;…content…&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/Q5-1.png&quot; alt=&quot;q5-1&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Le graphique ci-dessus présente une comparaison des différents types de tirs par rapport aux buts marqués pour chaque type lors de la saison 2019-20.&lt;/p&gt;
+
+&lt;h4 id=&quot;type-de-tir-le-plus-courant&quot;&gt;Type de tir le plus courant&lt;/h4&gt;
+&lt;p&gt;On peut constater que “Wrist Shot” est clairement le type de tir le plus fréquemment utilisé par les équipes.&lt;/p&gt;
+
+&lt;h4 id=&quot;type-de-tir-le-plus-dangereux&quot;&gt;Type de tir le plus dangereux&lt;/h4&gt;
+&lt;p&gt;En observant la proportion de buts par rapport au nombre total de tirs, le “Tip-In” semble être le plus efficace pour marquer des buts. Cependant, le “Wrist Shot”, en raison de sa fréquence élevée, a également produit un grand nombre de buts.&lt;/p&gt;
+
+&lt;h4 id=&quot;pourquoi-ce-type-de-graphique&quot;&gt;Pourquoi ce type de graphique&lt;/h4&gt;
+&lt;p&gt;On a choisi un graphique à barres empilées car il permet de comparer directement le nombre total de tirs et le nombre de buts pour chaque type de tir. Les couleurs Rouges et Vertes permettent de distinguer les buts des tirs.&lt;/p&gt;
 
 &lt;h3 id=&quot;question-52&quot;&gt;Question 5.2&lt;/h3&gt;
 &lt;div class=&quot;message&quot;&gt;
@@ -279,14 +290,38 @@
 
 &lt;/div&gt;
 
-&lt;p&gt;…content…&lt;/p&gt;
+&lt;p&gt;Comprendre la relation entre la distance du tir et la probabilité de marquer est crucial pour les équipes et les entraîneurs. Cette connaissance peut influencer les stratégies offensives des équipes par exemple. Il est donc toujours utile de visualiser ces relations. Les graphiques ci-dessous montrent la probabilité de marquer un but en fonction de la distance du tir pour les saisons 2018-19, 2019-20 et 2020-21.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/assets/Q5-2_2018.png&quot; alt=&quot;q5-2_2018&quot; /&gt;
+&lt;img src=&quot;/assets/Q5-2_2019.png&quot; alt=&quot;q5-2_2019&quot; /&gt;
+&lt;img src=&quot;/assets/Q5-2_2020.png&quot; alt=&quot;q5-2_2020&quot; /&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;observations&quot;&gt;Observations&lt;/h4&gt;
+&lt;p&gt;Au cours des saisons 2018 et 2019, les données montrent clairement que les tirs à une distance plus courte ont une probabilité significativement plus élevée de se transformer en buts. Cependant, la saison 2020-21 présente une tendance différente, avec des probabilités de marquer qui ne sont pas aussi élevées, même pour les tirs à courte distance. Cette différence est attribuée au nombre de matches joués cette saison en raison de la pandémie de COVID-19
+À mesure que la distance augmente, la probabilité de marquer diminue. Cependant, il y a certaines distances où il y a des pics ou des augmentations notables de la probabilité. Cela pourrait être dû à des tirs précis, comme les « Slap shots », qui sont puissants et peuvent surprendre le gardien.
+Il y a une certaine cohérence dans la tendance à travers les trois saisons, bien que de légères variations puissent être observées.&lt;/p&gt;
+
+&lt;h4 id=&quot;pourquoi-ce-type-de-graphique-1&quot;&gt;Pourquoi ce type de graphique&lt;/h4&gt;
+&lt;p&gt;On a choisi un graphique linéaire car il permet de voir clairement comment une variable (dans ce cas, la probabilité de marquer) change en fonction d’une autre variable continue (dans ce cas, la distance du tir). Les graphiques linéaires sont un excellent choix pour notre situation puisqu’ils captent les pics et les creux.&lt;/p&gt;
 
 &lt;h3 id=&quot;question-53&quot;&gt;Question 5.3&lt;/h3&gt;
 &lt;div class=&quot;message&quot;&gt;
     Combinez les informations des sections précédentes pour produire un graphique qui montre le pourcentage de buts (# buts / # tirs) en fonction à la fois de la distance par rapport au filet et de la catégorie de types de tirs (vous pouvez choisir une seule saison de votre choix). Discutez brièvement de vos conclusions. Par exemple, quels sont les types de tirs les plus dangereux?
 &lt;/div&gt;
 
-&lt;p&gt;…content…&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/assets/Q5-3.png&quot; alt=&quot;q5-3&quot; /&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;tirs-rapprochés&quot;&gt;Tirs rapprochés&lt;/h4&gt;
+&lt;p&gt;Comme attendu, il y a une concentration plus élevée (zones plus claires) de buts pour les tirs effectués à courte distance, en particulier pour les “Tip-Ins” et les “Snap Shots”. Cela renforce l’idée que les tirs rapprochés ont généralement une probabilité plus élevée de se transformer en des buts.&lt;/p&gt;
+
+&lt;h4 id=&quot;efficacité-des-tip-ins&quot;&gt;Efficacité des “Tip-Ins”&lt;/h4&gt;
+&lt;p&gt;Les “Tip-Ins”, semblent être particulièrement efficaces à courte distance. Cela pourrait être dû à la nature imprévisible de ces tirs, rendant difficile pour le gardien de but de les arrêter.&lt;/p&gt;
+
+&lt;h4 id=&quot;variabilité-avec-la-distance&quot;&gt;Variabilité avec la distance&lt;/h4&gt;
+&lt;p&gt;Pour les tirs tels que les “Slap Shots” et les “Wrist Shots”, il y a une variabilité notable dans le pourcentage de buts à mesure que la distance augmente. Bien que ces tirs soient généralement moins efficaces à longue distance, il y a des zones où ils ont un taux de réussite relativement élevé, peut-être en raison de la puissance ou de la précision du tir.&lt;/p&gt;
+
+&lt;h4 id=&quot;zones-plus-foncées-à-longue-distance&quot;&gt;Zones plus foncées à longue distance&lt;/h4&gt;
+&lt;p&gt;Comme prévu, la plupart des types de tirs ont un pourcentage de buts plus faible lorsqu’ils sont pris à longue distance. Cela est logique car il est généralement plus difficile de marquer depuis une distance éloignée. Sauf que pour quelques cas, on peut remarquer des grands pourcentages et c’est a cause du nombre limités des tirs effectués à ces distances durant cette saison.&lt;/p&gt;
 
 &lt;h2 id=&quot;section-6--visualisations-avancées&quot;&gt;Section 6 : Visualisations avancées&lt;/h2&gt;
 
