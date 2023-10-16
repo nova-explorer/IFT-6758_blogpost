@@ -2,27 +2,15 @@
 
 Blog Post pour le projet de IFT-6758
 
+Serving:
+```bash
 bundle exec jekyll serve
+```
 
 TODO:
-- Edit
-    - README.md
-    - about.md
-        - Voir si plus de détails sont pertinents
-    - _config.yml
-        - maybe some links?
-    - Essayer d'ajuster la largeur du texte? le wrapping du code fait pas super beau
-
 - Questions:
     - 4
         - 4.1 Possibilité de le mettre en markdown, le formattage du paragraphe est juste pas centré
-    - 5
-        - 5.2 Pas changé en html interactif puisque je pense que c'est intéressant de voir les trois graphiques côte-à-côte
-    - 6
-        - 6.1
-        - 6.2
-        - 6.3
-        - 6.4
 
 # Instructions pertinentes telles que copiées dans le README du template
 
