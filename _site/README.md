@@ -7,11 +7,6 @@ Serving:
 bundle exec jekyll serve
 ```
 
-TODO:
-- Questions:
-    - 4
-        - 4.1 Possibilité de le mettre en markdown, le formattage du paragraphe est juste pas centré
-
 # Instructions pertinentes telles que copiées dans le README du template
 
 ## Installation
