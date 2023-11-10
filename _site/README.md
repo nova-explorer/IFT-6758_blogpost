@@ -6,6 +6,10 @@ Serving:
 ```bash
 bundle exec jekyll serve
 ```
+TODO :
+- mettre des abbréviations pour les 4 courbes?
+- ajuster les marges pour que le texte prenne plus de place.
+
 4 courbes :
   - Les courbes Receiver Operating Characteristic (ROC) et la métrique AUC de la courbe ROC. Incluez une ligne de base de classificateur aléatoire, c'est-à-dire que chaque tir a 50 % de chances d'être un but.
   - Le taux de buts (#buts / (#non_buts + #buts)) comme une fonction du centile de la probabilité de tir donnée par le modèle, c'est-à-dire que si une valeur est au 70e centile, elle est supérieure à 70% des données.
