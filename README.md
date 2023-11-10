@@ -19,18 +19,9 @@ TODO :
 TODO - Questions:
   - 2
     - 2.1
-      -	histogramme nombre buts et non-buts, séparés, regroupés par distance
-      - histogramme nombre buts et non-buts, séparés, regroupés par angle
-      -	histogramme 2D distance vs angle. Pas besoin de séparer les buts et les non-buts.
-      - Discuter.
-    - 2.2
-      - figure taux de buts vs distance
-      - figure taux de buts vs angle
-      - Discuter.
+      -	checker les angles
     - 2.3
-      - histogramme nombre buts nets vides et non-vides, séparés, classés (regroupés ?) par distance
-      - Incluez ce chiffre dans votre article de blog et discutez de vos observations
-      - Pouvez-vous trouver des événements qui ont des caractéristiques incorrectes (par exemple, de mauvaises coordonnées x/y) ? Si oui, prouvez qu'un événement a des caractéristiques incorrectes.
+      - checker les angles
   - 3
     - 3.1
       - Discuter prédictions et problème potentiel
