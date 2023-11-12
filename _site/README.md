@@ -17,20 +17,7 @@ TODO :
   - Le diagramme de fiabilité (courbe de calibration). Scikit-learn fournit des fonctionnalités pour créer un diagramme de fiabilité en quelques lignes de code ; consultez l'API CalibrationDisplay (en particulier les méthodes .from_estimator() ou .from_predictions() ) pour plus d'informations.
 
 TODO - Questions:
-  - 2
-    - 2.1
-      -	checker les angles
-    - 2.3
-      - checker les angles
   - 3
-    - 3.1
-      - Discuter prédictions et problème potentiel
-      - (peut-être intéressant de mettre un graphe de notre régression?)
-    - 3.3
-      - 4 courbes sur train=distance
-      - 4 courbes sur train=angle
-      - 4 courbes sur train=distance & angle
-      - 4 courbes pour ligne de base aléatoire
     - 3.4
       - lien comet.ml pour train=distance
       - lien comet.ml pour train=angle
